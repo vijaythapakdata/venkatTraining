@@ -1,0 +1,21 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "18.20.6",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.24.0"
+    },
+    "version": "1.20.0",
+    "libraryName": "venkat-training",
+    "libraryId": "5132e523-5000-46cf-84bc-dd8640b7a38c",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "VenkatTraining",
+    "solutionShortDescription": "VenkatTraining description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "venkat-training-client-side-solution",
+    "id": "5132e523-5000-46cf-84bc-dd8640b7a38c",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.20.0"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "VenkatTraining description"
+      },
+      "longDescription": {
+        "default": "VenkatTraining description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "venkat-training Feature",
+        "description": "The feature that activates elements of the venkat-training solution.",
+        "id": "7aaeb730-2690-48c0-99af-2806cf37b7ee",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/venkat-training.sppkg"
+  }
+}
