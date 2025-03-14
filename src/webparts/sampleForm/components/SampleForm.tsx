@@ -89,17 +89,21 @@ throw err;
     options={this.props.DepartmentChoice}
     selectedKey={this.state.Department}
     label='Department'
-    placeholder='--select--'/>
+    placeholder='--select--'
+    
+    onChange={(_,options)=>this.hanleChange("Department",options?.key as string ||"")}/>
     <ChoiceGroup
     options={this.props.GenderChoice}
     selectedKey={this.state.Gender}
     label='Gender'
+    onChange={(_,options)=>this.hanleChange("Gender",options?.key as string ||"")}
     />
     <Dropdown options={this.props.SkillsChoice}
     multiSelect
     defaultSelectedKeys={this.state.Skills}
     onChange={this.onSkillsChange}
     label='Skills'
+    
 />    <br/>
     <PrimaryButton text=' Save' onClick={()=>this.createData()} iconProps={{iconName:'Save'}}/>
     </>

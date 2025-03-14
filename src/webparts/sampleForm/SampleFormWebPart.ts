@@ -78,7 +78,7 @@ export default class SampleFormWebPart extends BaseClientSideWebPart<ISampleForm
   //get choice fields
   private async getChoiceFields(siteurl:string,fieldValue:string):Promise<any>{
     try{
-const response=await fetch(`${siteurl}/_api/web/lists/getbytitle('First List')/fields?$filter=EntityPropertName eq '${fieldValue}'`,{
+const response=await fetch(`${siteurl}/_api/web/lists/getbytitle('First List')/fields?$filter=EntityPropertyName eq '${fieldValue}'`,{
   method:'GET',
   headers:{
     'Accept':'application/json;odata=nometadata'
