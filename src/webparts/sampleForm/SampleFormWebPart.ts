@@ -25,13 +25,16 @@ export default class SampleFormWebPart extends BaseClientSideWebPart<ISampleForm
     });
   }
 
-  public render(): void {
+  public async  render(): Promise<void> {
     const element: React.ReactElement<ISampleFormProps> = React.createElement(
       SampleForm,
       {
         ListName: this.properties.ListName,
         context:this.context,
-        siteurl:this.context.pageContext.web.absoluteUrl
+        siteurl:this.context.pageContext.web.absoluteUrl,
+        DepartmentChoice:await this.getChoiceFields(this.context.pageContext.web.absoluteUrl,"Department"),
+        GenderChoice:await this.getChoiceFields(this.context.pageContext.web.absoluteUrl,"Gender"),
+        SkillsChoice:await this.getChoiceFields(this.context.pageContext.web.absoluteUrl,"Skills")
       }
     );
 
@@ -71,5 +74,29 @@ export default class SampleFormWebPart extends BaseClientSideWebPart<ISampleForm
         }
       ]
     };
+  }
+  //get choice fields
+  private async getChoiceFields(siteurl:string,fieldValue:string):Promise<any>{
+    try{
+const response=await fetch(`${siteurl}/_api/web/lists/getbytitle('First List')/fields?$filter=EntityPropertName eq '${fieldValue}'`,{
+  method:'GET',
+  headers:{
+    'Accept':'application/json;odata=nometadata'
+  }
+});
+if(!response.ok){
+  throw new Error(`Error found while fetching the choice field : ${response.status}-${response.text}`);
+}
+const data=await response.json();
+const choices=data?.value[0]?.Choices||[];
+return choices.map((choice:any)=>({
+  key:choice,
+  text:choice
+}));
+    }
+    catch(err){
+console.log("Erorr ");
+throw err;
+    }
   }
 }

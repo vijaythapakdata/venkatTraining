@@ -6,7 +6,7 @@ import {Web} from '@pnp/sp/presets/all';
 import "@pnp/sp/items";
 import "@pnp/sp/lists";
 import { Dialog } from '@microsoft/sp-dialog';
-import { PrimaryButton, TextField } from '@fluentui/react';
+import { ChoiceGroup, Dropdown, IDropdownOption, PrimaryButton, TextField } from '@fluentui/react';
 import {PeoplePicker,PrincipalType} from "@pnp/spfx-controls-react/lib/PeoplePicker";
 
 export default class SampleForm extends React.Component<ISampleFormProps,ISampleFormState> {
@@ -16,7 +16,10 @@ export default class SampleForm extends React.Component<ISampleFormProps,ISample
       EmployeeName:"",
       Age:"",
       Manager:[],
-      ManagerId:[]
+      ManagerId:[],
+      Department:"",
+      Skills:[],
+      Gender:""
     }
   }
   //create Data
@@ -26,14 +29,20 @@ export default class SampleForm extends React.Component<ISampleFormProps,ISample
     await web.lists.getByTitle(this.props.ListName).items.add({
       Title:this.state.EmployeeName,
       Age:parseInt(this.state.Age),
-      ManagerId:{results:this.state.ManagerId}
+      ManagerId:{results:this.state.ManagerId},
+      Department:this.state.Department,
+      Skills:{results:this.state.Skills},
+      Gender:this.state.Gender
     });
     Dialog.alert("Data has been saved successfully");
     this.setState({
       EmployeeName:"",
       Age:"",
      Manager:"",
-     ManagerId:0
+     ManagerId:0,
+     Skills:[],
+     Gender:"",
+     Department:""
     })
    }
    catch(err){
@@ -44,6 +53,11 @@ throw err;
   //even handling
   private hanleChange=(fieldValue:keyof ISampleFormState,value:string|boolean|number):void=>{
     this.setState({[fieldValue]:value}as  unknown as Pick<ISampleFormState,keyof ISampleFormState>);
+  }
+  //Skills
+  private onSkillsChange=(event:React.FormEvent<HTMLInputElement>,options:IDropdownOption):void=>{
+    const selectedkey=options.selected?[...this.state.Skills,options.key as string]:this.state.Skills.filter((key:any)=>key!==options.key);
+    this.setState({Skills:selectedkey});
   }
   public render(): React.ReactElement<ISampleFormProps> {
    
@@ -70,7 +84,23 @@ throw err;
     personSelectionLimit={4}
     webAbsoluteUrl={this.props.siteurl}
     />
-    <br/>
+    <Dropdown
+    
+    options={this.props.DepartmentChoice}
+    selectedKey={this.state.Department}
+    label='Department'
+    placeholder='--select--'/>
+    <ChoiceGroup
+    options={this.props.GenderChoice}
+    selectedKey={this.state.Gender}
+    label='Gender'
+    />
+    <Dropdown options={this.props.SkillsChoice}
+    multiSelect
+    defaultSelectedKeys={this.state.Skills}
+    onChange={this.onSkillsChange}
+    label='Skills'
+/>    <br/>
     <PrimaryButton text=' Save' onClick={()=>this.createData()} iconProps={{iconName:'Save'}}/>
     </>
     );
