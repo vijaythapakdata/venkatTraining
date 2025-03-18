@@ -19,7 +19,8 @@ export default class SampleForm extends React.Component<ISampleFormProps,ISample
       ManagerId:[],
       Department:"",
       Skills:[],
-      Gender:""
+      Gender:"",
+      City:""
     }
   }
   //create Data
@@ -32,17 +33,19 @@ export default class SampleForm extends React.Component<ISampleFormProps,ISample
       ManagerId:{results:this.state.ManagerId},
       Department:this.state.Department,
       Skills:{results:this.state.Skills},
-      Gender:this.state.Gender
+      Gender:this.state.Gender,
+      CityId:this.state.City
     });
     Dialog.alert("Data has been saved successfully");
     this.setState({
       EmployeeName:"",
       Age:"",
-     Manager:"",
-     ManagerId:0,
+     Manager:[],
+     ManagerId:[],
      Skills:[],
      Gender:"",
-     Department:""
+     Department:"",
+     City:""
     })
    }
    catch(err){
@@ -104,7 +107,14 @@ throw err;
     onChange={this.onSkillsChange}
     label='Skills'
     
-/>    <br/>
+/>
+<Dropdown options={this.props.cityOptions}
+placeholder='--select--'
+selectedKey={this.state.City}
+onChange={(_,options)=>this.hanleChange("City",options?.key as number||"")}
+label='City'
+/>
+    <br/>
     <PrimaryButton text=' Save' onClick={()=>this.createData()} iconProps={{iconName:'Save'}}/>
     </>
     );

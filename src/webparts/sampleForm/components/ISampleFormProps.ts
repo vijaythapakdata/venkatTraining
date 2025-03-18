@@ -7,4 +7,5 @@ context:WebPartContext;
 DepartmentChoice:any;
 SkillsChoice:any;
 GenderChoice:any;
+cityOptions:any;
 }

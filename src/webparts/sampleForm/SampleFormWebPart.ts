@@ -14,6 +14,8 @@ import { ISampleFormProps } from './components/ISampleFormProps';
 
 export interface ISampleFormWebPartProps {
   ListName: string;
+  cityOptions:any;
+
 }
 
 export default class SampleFormWebPart extends BaseClientSideWebPart<ISampleFormWebPartProps> {
@@ -22,6 +24,7 @@ export default class SampleFormWebPart extends BaseClientSideWebPart<ISampleForm
       sp.setup({
         spfxContext:this.context as any
       });
+      this.getLookup();
     });
   }
 
@@ -34,7 +37,8 @@ export default class SampleFormWebPart extends BaseClientSideWebPart<ISampleForm
         siteurl:this.context.pageContext.web.absoluteUrl,
         DepartmentChoice:await this.getChoiceFields(this.context.pageContext.web.absoluteUrl,"Department"),
         GenderChoice:await this.getChoiceFields(this.context.pageContext.web.absoluteUrl,"Gender"),
-        SkillsChoice:await this.getChoiceFields(this.context.pageContext.web.absoluteUrl,"Skills")
+        SkillsChoice:await this.getChoiceFields(this.context.pageContext.web.absoluteUrl,"Skills"),
+        cityoptions:this.properties.cityOptions
       }
     );
 
@@ -99,4 +103,31 @@ console.log("Erorr ");
 throw err;
     }
   }
+  //Lookup column fetchup
+  private async getLookup():Promise<void>{
+    try{
+      const response=await fetch(`${this.context.pageContext.web.absoluteUrl}/_api/web/lists/getbytitle('Cities')/items?$select=Title,ID`,
+        {
+          method:'GET',
+          headers:{
+            'Accept':'application/json;odata=nometadata'
+          }
+        }
+      );
+      if(!response.ok){
+        throw new Error(`Error found while fetching the choice field : ${response.status}-${response.text}`);
+      }
+      const data=await response.json();
+      const cityOptions=data.value.map((city:{ID:string,Title:string})=>({
+        key:city.ID,
+        text:city.Title
+      }));
+      this.properties.cityOptions=cityOptions;
+    }
+    catch(err){
+      console.log("Erorr ");
+throw err;
+    }
+  }
+  
 }
