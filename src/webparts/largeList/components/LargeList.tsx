@@ -13,7 +13,7 @@ const LargeList :React.FC<ILargeListProps>=(props)=>{
   useEffect(()=>{
     const fetchdata=async()=>{
       try{
-        const result =await _service.getListItems(props.ListName);
+        const result =await _service.getListItemsMorethan5000Items(props.ListName);
         setResult(result);
       }
       catch(err){
