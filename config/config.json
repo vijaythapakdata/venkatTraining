@@ -25,6 +25,14 @@
           "manifest": "./src/webparts/largeList/LargeListWebPart.manifest.json"
         }
       ]
+    },
+    "formik-form-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/formikForm/FormikFormWebPart.js",
+          "manifest": "./src/webparts/formikForm/FormikFormWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -32,6 +40,7 @@
     "SampleFormWebPartStrings": "lib/webparts/sampleForm/loc/{locale}.js",
     "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js",
     "FilePickerWebPartStrings": "lib/webparts/filePicker/loc/{locale}.js",
-    "LargeListWebPartStrings": "lib/webparts/largeList/loc/{locale}.js"
+    "LargeListWebPartStrings": "lib/webparts/largeList/loc/{locale}.js",
+    "FormikFormWebPartStrings": "lib/webparts/formikForm/loc/{locale}.js"
   }
 }

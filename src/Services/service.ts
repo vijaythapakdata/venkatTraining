@@ -6,7 +6,7 @@ export class Service{
    constructor(context:WebPartContext){
     sp.setup({
         spfxContext:context as any
-    })
+    });
    }
 
    //get list item
