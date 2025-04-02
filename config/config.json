@@ -33,6 +33,22 @@
           "manifest": "./src/webparts/formikForm/FormikFormWebPart.manifest.json"
         }
       ]
+    },
+    "hello-world-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/helloWorld/HelloWorldWebPart.js",
+          "manifest": "./src/webparts/helloWorld/HelloWorldWebPart.manifest.json"
+        }
+      ]
+    },
+    "functional-form-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/functionalForm/FunctionalFormWebPart.js",
+          "manifest": "./src/webparts/functionalForm/FunctionalFormWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -41,6 +57,8 @@
     "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js",
     "FilePickerWebPartStrings": "lib/webparts/filePicker/loc/{locale}.js",
     "LargeListWebPartStrings": "lib/webparts/largeList/loc/{locale}.js",
-    "FormikFormWebPartStrings": "lib/webparts/formikForm/loc/{locale}.js"
+    "FormikFormWebPartStrings": "lib/webparts/formikForm/loc/{locale}.js",
+    "HelloWorldWebPartStrings": "lib/webparts/helloWorld/loc/{locale}.js",
+    "FunctionalFormWebPartStrings": "lib/webparts/functionalForm/loc/{locale}.js"
   }
 }
